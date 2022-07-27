@@ -4,7 +4,7 @@ flutter_smart_dialog: ^4.0.2
 
 cached_network_image: ^3.2.0
 
-####说明
+#### 说明
 目前package仅暴露出自定义的组件，工具类仅做代码保存，未对外暴露
 
 ## 初始化说明
@@ -21,7 +21,7 @@ void realRunApp() async {
   runApp(const MyApp());
 }
 ```
-####② FlutterSmartDialog初始化
+#### ② FlutterSmartDialog初始化
 库中引入了FlutterSmartDialog插件库，为了方便使用且易读，本库直接暴露该插件初始化文件，直接使用FlutterSmartDialog库的初始化方式即可
 ###### 示例
 ```dart
