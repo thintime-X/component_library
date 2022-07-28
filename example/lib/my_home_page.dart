@@ -1,4 +1,5 @@
 import 'package:component_library/component_library.dart';
+import 'package:example/page/my_test.dart';
 import 'package:flutter/material.dart';
 
 /// @author: zx
@@ -13,17 +14,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
-    ClDialogUtil.showBottomDialog(
+    /*ClDialogUtil.showBottomDialog(
       child: Container(),
       theme: const ClBottomDialogTheme(),
-    );
+    );*/
+    Navigator.push(context, MaterialPageRoute(builder: (_) => MyTestPage()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      appBar: const ClAppBar(
+        title: "标题",
       ),
       body: Container(
         padding: const EdgeInsets.all(10),

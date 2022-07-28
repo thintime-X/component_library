@@ -21,6 +21,8 @@ export 'src/button/cl_custom_button.dart';
 //列表
 export 'src/widget/cl_behavior.dart';
 
+//AppBar
+export 'src/app_bar/cl_app_bar.dart';
 //吐司
 export 'src/dialog/cl_toast.dart';
 

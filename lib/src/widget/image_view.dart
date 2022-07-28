@@ -102,7 +102,7 @@ class _LoadNetworkImg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: borderRadius,
+      borderRadius: borderRadius ?? BorderRadius.zero,
       child: GestureDetector(
         onTap: onTap,
         child: CachedNetworkImage(
@@ -173,7 +173,7 @@ class _LoadLocalImg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: borderRadius,
+      borderRadius: borderRadius ?? BorderRadius.zero,
       child: GestureDetector(
         onTap: onTap,
         child: Image.asset(
