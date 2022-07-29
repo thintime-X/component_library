@@ -1,8 +1,7 @@
 import 'package:component_library/src/res/my_gaps.dart';
 import 'package:component_library/src/theme/cl_dialog_button_theme.dart';
+import 'package:component_library/src/widget/button/cl_custom_button.dart';
 import 'package:flutter/material.dart';
-
-import '../button/cl_custom_button.dart';
 
 /// @author: zx
 /// @description: 弹窗底部按钮
