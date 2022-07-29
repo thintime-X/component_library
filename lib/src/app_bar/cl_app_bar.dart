@@ -154,8 +154,6 @@ class _ClAppBarState extends State<ClAppBar> {
     );
   }
 
-
-
   ///返回状态栏图片亮度
   SystemUiOverlayStyle _systemOverlayStyleForBrightness(Brightness brightness) {
     return brightness == Brightness.dark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark;

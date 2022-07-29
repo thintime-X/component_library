@@ -1,5 +1,4 @@
 import 'package:component_library/component_library.dart';
-import 'package:example/page/my_test.dart';
 import 'package:flutter/material.dart';
 
 /// @author: zx
@@ -14,11 +13,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
-    /*ClDialogUtil.showBottomDialog(
-      child: Container(),
-      theme: const ClBottomDialogTheme(),
-    );*/
-    Navigator.push(context, MaterialPageRoute(builder: (_) => MyTestPage()));
+    ClDialogUtil.showBottomDialog(
+      title: "标题",
+      child: Column()
+    );
+    //Navigator.push(context, MaterialPageRoute(builder: (_) => MyTestPage()));
   }
 
   @override
@@ -28,16 +27,34 @@ class _MyHomePageState extends State<MyHomePage> {
         title: "标题",
       ),
       body: Container(
-        padding: const EdgeInsets.all(10),
+        //padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            SizedBox(
-              height: 20,
-            ),
-            ClImageTextView(
-              url: "https://upload-images.jianshu.io/upload_images/2739107-5392d79543bcf2d4.png?imageMogr2/auto-orient/strip|imageView2/2/w/1058/format/webp",
-              title: "文字",
+            ClExpansionTile(
+              titleText: "标题",
+              visualDensity: VisualDensity(vertical: -1),
+              textStyle: TextStyle(fontSize: 16),
+              tileColor: Colors.grey,
+              dense: true,
+              trailing: SizedBox(),
+              children: [
+                ClListTile(
+                  titleText: "第一",
+                  dense: true,
+                  visualDensity: VisualDensity(vertical: -4),
+                ),
+                ClListTile(
+                  titleText: "第一",
+                  dense: true,
+                  visualDensity: VisualDensity(vertical: -4),
+                ),
+                ClListTile(
+                  titleText: "第一",
+                  dense: true,
+                  visualDensity: VisualDensity(vertical: -4),
+                ),
+              ],
             ),
           ],
         ),

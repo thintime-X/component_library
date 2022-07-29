@@ -1,3 +1,4 @@
+import 'package:component_library/src/res/my_gaps.dart';
 import 'package:component_library/src/theme/cl_dialog_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -60,10 +61,7 @@ class DialogCenterView extends StatelessWidget {
                 ),
               ),
               child,
-              if (theme.showLine) Container(
-                height: 1,
-                color: const Color(0xFFECECEC),
-              ),
+              if (theme.showLine) MyGaps.hLine,
               _getBottomWidget(),
             ],
           ),
