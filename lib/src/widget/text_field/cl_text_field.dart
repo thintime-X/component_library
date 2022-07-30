@@ -2,8 +2,10 @@ import 'package:component_library/src/config/cl_text_field_config.dart';
 import 'package:flutter/material.dart';
 
 /// @description: 自定义TextField
-class ClTextField extends StatelessWidget {
+class ClTextField extends StatefulWidget {
   final ClTextFieldConfig config;
+
+
 
   const ClTextField({
     Key? key,
@@ -11,7 +13,13 @@ class ClTextField extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<ClTextField> createState() => _ClTextFieldState();
+}
+
+class _ClTextFieldState extends State<ClTextField> {
+
+  ///
+  TextField getTextField(BuildContext context, ClTextFieldConfig config,) {
     return TextField(
       readOnly: config.readOnly,
       toolbarOptions: config.toolbarOptions,
@@ -35,8 +43,8 @@ class ClTextField extends StatelessWidget {
       smartDashesType: config.smartDashesType,
       smartQuotesType: config.smartQuotesType,
       enableSuggestions: config.enableSuggestions,
-      maxLines: config.maxLines,
-      minLines: config.minLines,
+      maxLines: null,//config.maxLines,
+      minLines: null,//config.minLines,
       maxLengthEnforcement: config.maxLengthEnforcement,
       expands: config.expands,
       selectionControls: config.selectionControls,
@@ -66,4 +74,26 @@ class ClTextField extends StatelessWidget {
       restorationId: config.restorationId,
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    ClTextFieldConfig config = widget.config;
+
+    if (config.expands) {
+      //填充
+      return Expanded(
+        child: getTextField(
+          context,
+          config.copyWith(
+            maxLines: null,
+            minLines: null,
+          ),
+        ),
+      );
+    }
+
+
+    return getTextField(context, config);
+  }
 }
+

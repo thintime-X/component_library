@@ -27,34 +27,14 @@ class _MyHomePageState extends State<MyHomePage> {
         title: "标题",
       ),
       body: Container(
-        //padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            ClExpansionTile(
-              titleText: "标题",
-              visualDensity: VisualDensity(vertical: -1),
-              textStyle: TextStyle(fontSize: 16),
-              tileColor: Colors.grey,
-              dense: true,
-              trailing: SizedBox(),
-              children: [
-                ClListTile(
-                  titleText: "第一",
-                  dense: true,
-                  visualDensity: VisualDensity(vertical: -4),
-                ),
-                ClListTile(
-                  titleText: "第一",
-                  dense: true,
-                  visualDensity: VisualDensity(vertical: -4),
-                ),
-                ClListTile(
-                  titleText: "第一",
-                  dense: true,
-                  visualDensity: VisualDensity(vertical: -4),
-                ),
-              ],
+          children: [
+            ClTextField(
+              config: ClTextFieldConfig(
+
+              ),
             ),
           ],
         ),
