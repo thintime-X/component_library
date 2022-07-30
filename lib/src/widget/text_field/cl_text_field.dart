@@ -4,12 +4,20 @@ import 'package:flutter/material.dart';
 /// @description: 自定义TextField
 class ClTextField extends StatefulWidget {
   final ClTextFieldConfig config;
-
-
+  final bool showBorder;
+  final Color? borderColor;
+  final double? borderWidth;
+  final BorderRadius? borderRadius;
+  final bool onlyBottomBorder;
 
   const ClTextField({
     Key? key,
     required this.config,
+    this.showBorder = false,
+    this.borderColor,
+    this.borderWidth,
+    this.borderRadius,
+    this.onlyBottomBorder = false,
   }) : super(key: key);
 
   @override
@@ -75,6 +83,23 @@ class _ClTextFieldState extends State<ClTextField> {
     );
   }
 
+  InputBorder getBorder() {
+    if (widget.onlyBottomBorder) {
+      return UnderlineInputBorder(
+        borderSide: BorderSide(color: widget.borderColor ?? const Color(0xFFBDBDBD), width: widget.borderWidth ?? 1),
+        borderRadius: widget.borderRadius ?? const BorderRadius.only(
+          topLeft: Radius.circular(4.0),
+          topRight: Radius.circular(4.0),
+        ),
+      );
+    } else {
+      return OutlineInputBorder(
+        borderSide: BorderSide(color: widget.borderColor ?? const Color(0xFFBDBDBD), width: widget.borderWidth ?? 1),
+        borderRadius: widget.borderRadius ?? const BorderRadius.all(Radius.circular(4)),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     ClTextFieldConfig config = widget.config;
@@ -91,9 +116,17 @@ class _ClTextFieldState extends State<ClTextField> {
         ),
       );
     }
-
+    if (widget.showBorder) {
+      /// 显示边框
+      return getTextField(context, config.copyWith(
+        decoration: config.decoration?.copyWith(
+          border: getBorder(),
+          enabledBorder: getBorder(),
+          focusedBorder: getBorder(),
+        ),
+      ));
+    }
 
     return getTextField(context, config);
   }
 }
-
