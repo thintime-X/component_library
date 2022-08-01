@@ -13,12 +13,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
-    ClDialogUtil.showBottomDialog(
+    /*ClDialogUtil.showBottomDialog(
       title: "标题",
       child: Column()
-    );
-    //Navigator.push(context, MaterialPageRoute(builder: (_) => MyTestPage()));
+    );*/
+    setState(() {
+      errorText = "错误信息";
+    });
   }
+
+  String? errorText;
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +37,14 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClTextField(
+              showBorder: true,
+              isPassword: true,
               config: ClTextFieldConfig(
-
+                decoration: InputDecoration(
+                  errorText: errorText,
+                  isCollapsed: true,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                ),
               ),
             ),
           ],

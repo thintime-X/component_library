@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 
 /// @description: 自定义TextField
 class ClTextField extends StatefulWidget {
+  /// 原始TextField参数
   final ClTextFieldConfig config;
+  // 以下为简便使用配置参数
+  /// 是否显示边框
   final bool showBorder;
+  /// 边框颜色
   final Color? borderColor;
+  /// 边框宽度
   final double? borderWidth;
+  /// 圆角角度
   final BorderRadius? borderRadius;
+  /// 仅底部边框
   final bool onlyBottomBorder;
+  /// 是否为密码输入框
+  final bool isPassword;
 
   const ClTextField({
     Key? key,
@@ -18,6 +27,7 @@ class ClTextField extends StatefulWidget {
     this.borderWidth,
     this.borderRadius,
     this.onlyBottomBorder = false,
+    this.isPassword = false,
   }) : super(key: key);
 
   @override
@@ -25,6 +35,7 @@ class ClTextField extends StatefulWidget {
 }
 
 class _ClTextFieldState extends State<ClTextField> {
+  bool canSeePwd = false;
 
   ///
   TextField getTextField(BuildContext context, ClTextFieldConfig config,) {
@@ -51,8 +62,8 @@ class _ClTextFieldState extends State<ClTextField> {
       smartDashesType: config.smartDashesType,
       smartQuotesType: config.smartQuotesType,
       enableSuggestions: config.enableSuggestions,
-      maxLines: null,//config.maxLines,
-      minLines: null,//config.minLines,
+      maxLines: config.maxLines,
+      minLines: config.minLines,
       maxLengthEnforcement: config.maxLengthEnforcement,
       expands: config.expands,
       selectionControls: config.selectionControls,
@@ -62,7 +73,7 @@ class _ClTextFieldState extends State<ClTextField> {
       onSubmitted: config.onSubmitted,
       onAppPrivateCommand: config.onAppPrivateCommand,
       inputFormatters: config.inputFormatters,
-      mouseCursor: config.mouseCursor, // TextField will handle the cursor
+      mouseCursor: config.mouseCursor,
       cursorWidth: config.cursorWidth,
       cursorHeight: config.cursorHeight,
       cursorRadius: config.cursorRadius,
@@ -83,6 +94,7 @@ class _ClTextFieldState extends State<ClTextField> {
     );
   }
 
+  /// 获取边框
   InputBorder getBorder() {
     if (widget.onlyBottomBorder) {
       return UnderlineInputBorder(
@@ -100,10 +112,50 @@ class _ClTextFieldState extends State<ClTextField> {
     }
   }
 
+  changeCanSeePwd() {
+    setState(() {
+      canSeePwd = !canSeePwd;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ClTextFieldConfig config = widget.config;
-
+    if (widget.showBorder) {
+      /// 显示边框
+      config = config.copyWith(
+        decoration: config.decoration?.copyWith(
+          border: getBorder(),
+          enabledBorder: getBorder(),
+          focusedBorder: getBorder(),
+        ),
+      );
+    }
+    if (widget.isPassword) {
+      /// 密码输入框
+      double height = config.decoration?.contentPadding?.vertical ?? 10;
+      if (height == 0) height = 10;
+      config = config.copyWith(
+        obscureText: !canSeePwd,
+        maxLines: 1,
+        decoration: config.decoration?.copyWith(
+          suffixIconConstraints: BoxConstraints(
+            minWidth: height * 2,
+            maxWidth: height * 2,
+            minHeight: height,
+            maxHeight: height,
+          ),
+          suffixIcon: GestureDetector(
+            onTap: changeCanSeePwd,
+            child: Icon(
+              canSeePwd ? Icons.visibility : Icons.visibility_off,
+              color: widget.borderColor,
+              size: height,
+            ),
+          ),
+        ),
+      );
+    }
     if (config.expands) {
       //填充
       return Expanded(
@@ -116,17 +168,6 @@ class _ClTextFieldState extends State<ClTextField> {
         ),
       );
     }
-    if (widget.showBorder) {
-      /// 显示边框
-      return getTextField(context, config.copyWith(
-        decoration: config.decoration?.copyWith(
-          border: getBorder(),
-          enabledBorder: getBorder(),
-          focusedBorder: getBorder(),
-        ),
-      ));
-    }
-
     return getTextField(context, config);
   }
 }

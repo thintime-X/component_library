@@ -24,7 +24,32 @@ class _MyAppState extends State<MyApp> {
       navigatorObservers: [
         FlutterSmartDialog.observer,
       ],
-      builder: FlutterSmartDialog.init(),
+      builder: FlutterSmartDialog.init(
+        builder: (context, child) {
+          return MediaQuery(
+            //设置文字大小不随系统设置改变
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: Scaffold(
+              body: TextSelectionTheme(
+                data: TextSelectionThemeData(
+                  cursorColor: Theme.of(context).primaryColor,//输入框光标颜色
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    //点击空白收起键盘
+                    FocusScopeNode currentFocus = FocusScope.of(context);
+                    if (!currentFocus.hasPrimaryFocus &&
+                        currentFocus.focusedChild != null) {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    }
+                  },
+                  child: child,
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
