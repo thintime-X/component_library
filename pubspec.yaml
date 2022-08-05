@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
 
   #工具
-  flutter_smart_dialog: ^4.0.2 #dialog toast相关
   cached_network_image: ^3.2.0
 
 dev_dependencies:
