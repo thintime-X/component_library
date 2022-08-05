@@ -1,27 +1,40 @@
-import 'package:component_library/component_library.dart';
 import 'package:flutter/material.dart';
+
+import 'image_view.dart';
 
 /// @author: zx
 /// @description: 图片文字组件
 class ClImageTextView extends StatelessWidget {
   /// 图片链接
   final String url;
+
   /// 文字
   final String title;
+
+  /// 图文组件
+  final Widget? imageWidget;
+
   /// 图片宽度
   final double? imgWidth;
+
   /// 图片高度
   final double? imgHeight;
+
   /// 图片圆角
-  final BorderRadius? borderRadius;
+  final BorderRadius borderRadius;
+
   /// 图片填充方式
   final BoxFit? fit;
+
   /// 文字样式
   final TextStyle? textStyle;
+
   /// 点击回调
   final Function()? onTap;
+
   /// 图片与文字间的间距
   final double? spacing;
+
   /// 图片与文字的排列方式
   final ImageTextMode? mode;
 
@@ -29,9 +42,10 @@ class ClImageTextView extends StatelessWidget {
     Key? key,
     required this.url,
     required this.title,
+    this.imageWidget,
     this.imgWidth,
     this.imgHeight,
-    this.borderRadius,
+    this.borderRadius = BorderRadius.zero,
     this.fit,
     this.textStyle,
     this.onTap,
@@ -84,7 +98,7 @@ class ClImageTextView extends StatelessWidget {
   }
 
   Widget _image() {
-    return ClImageView(
+    return imageWidget ?? ClImageView(
       url: url,
       width: imgWidth ?? 20,
       height: imgHeight ?? 20,

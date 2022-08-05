@@ -12,14 +12,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounter() {
-    /*ClDialogUtil.showBottomDialog(
-      title: "标题",
-      child: Column()
-    );*/
-    setState(() {
-      errorText = "错误信息";
-    });
+  void _incrementCounter(BuildContext context) {
+
   }
 
   String? errorText;
@@ -47,11 +41,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+            SizedBox(height: 10,),
+            ClBottomButton(
+              mainBackground: Colors.blue,
+              mainBorderRadius: BorderRadius.circular(5),
+              showLine: true,
+              mainTap: () {},
+              secondText: "返回",
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {_incrementCounter(context);},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
